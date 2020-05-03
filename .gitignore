@@ -30,3 +30,29 @@
 *.exe
 *.out
 *.app
+
+# Debug Information
+*.pdb
+*.ilk
+*.exp
+
+*.FileListAbsolute.txt
+*.idb
+
+*.cache
+*.deps
+
+*.lastbuildstate
+*.tlog
+*.log
+
+# IDE Information
+*.vs
+
+!x64/Debug/FreeImage.dll
+!x64/Debug/glew64.dll
+!x64/Debug/freeglut.dll
+
+!x64/Release/FreeImage.dll
+!x64/Release/glew64.dll
+!x64/Release/freeglut.dll

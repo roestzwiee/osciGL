@@ -9,7 +9,8 @@ public:
 
 public:
 
-	void initScope(int argc, char* argv[]);
+	__declspec(dllexport) void initScope(int argc, char* argv[]);
+	__declspec(dllexport) void initEmpyt();
 	
 	
 };
