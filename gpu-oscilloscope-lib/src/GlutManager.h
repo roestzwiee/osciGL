@@ -2,17 +2,10 @@
 #ifndef H_GLUTMANAGER
 #define H_GLUTMANAGER
 
-#include <helper_gl.h>
-#include <GL/freeglut.h>
 
-// includes, cuda
-#include <cuda_runtime.h>
-#include <cuda_gl_interop.h>
+#include "CudaComputation.h"
 
-// Utilities and timing functions
-#include <helper_functions.h>    // includes cuda.h and cuda_runtime_api.h
-
-#include <helper_cuda.h>
+#include "UserInput.h"
 
 #define MAX(a,b) ((a > b) ? a : b)
 
@@ -23,8 +16,6 @@
   */
 const unsigned int window_width = 512;
 const unsigned int window_height = 512;
-const unsigned int mesh_width = 128;
-const unsigned int mesh_height = 1024;
 
 /*
  * Common initialization
@@ -32,6 +23,12 @@ const unsigned int mesh_height = 1024;
 void initialize(int argc, char* argv[]);
 bool initGL(int* argc, char** argv);
 void createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned int vbo_res_flags);
+
+/*
+ * Set externals
+ */
+void setControls(UserInput * controls);
+void setComputationCore(CudaComputation * computationCoree);
 
 /*
  * Computation

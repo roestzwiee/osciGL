@@ -1,6 +1,4 @@
 #include "GlutManager.h"
-#include "UserInput.h"
-#include "CudaComputation.h"
 
 /**
  * CUDA Variables
@@ -29,20 +27,19 @@ bool g_bQAReadback = false;
 /*
  * The C++ implementation of Callbacks
  */
-UserInput * sounidRuntime;
+UserInput * controls;
 
 /*
  * The C++ implementation for Computation
  */
-CudaComputation* cudaComputation;
+CudaComputation* computationCore;
 
 
 /**
  * Initialization Routines
  */
 void initialize(int argc, char* argv[])
-{
-
+{	
     // Create the CUTIL timer
     sdkCreateTimer(&timer);
 
@@ -65,13 +62,19 @@ void initialize(int argc, char* argv[])
     // run the cuda part
     runCudaInternal(&cuda_vbo_resource);
 
-    sounidRuntime = new UserInput();
-    cudaComputation = new CudaComputation();
-	
     // start rendering mainloop
     glutMainLoop();
 }
 
+void setComputationCore(CudaComputation* computationCoree)
+{
+    computationCore = computationCoree;
+}
+
+void setControls(UserInput* controlss)
+{
+    controls = controlss;
+}
 
 bool initGL(int* argc, char** argv)
 {
@@ -120,7 +123,7 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
     glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 
     // initialize buffer object
-    const unsigned int size = mesh_width * mesh_height * 4 * sizeof(float);
+    const unsigned int size = computationCore->mesh_width * computationCore->mesh_height * 4 * sizeof(float);
     glBufferData(GL_ARRAY_BUFFER, size, 0, GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -136,7 +139,7 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
  */
 void runCudaInternal(cudaGraphicsResource** vbo_resource)
 {
-    cudaComputation->runCuda(vbo_resource, g_fAnim);
+    computationCore->runCuda(vbo_resource, g_fAnim);
 }
 
 void computeFPS()
@@ -172,9 +175,9 @@ void DisplayCallback()
     // set view matrix
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0.0, 0.0, sounidRuntime->translate_z);
-    glRotatef(sounidRuntime->rotate_x, 1.0, 0.0, 0.0);
-    glRotatef(sounidRuntime->rotate_y, 0.0, 1.0, 0.0);
+    glTranslatef(0.0, 0.0, controls->translate_z);
+    glRotatef(controls->rotate_x, 1.0, 0.0, 0.0);
+    glRotatef(controls->rotate_y, 0.0, 1.0, 0.0);
     
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -182,7 +185,7 @@ void DisplayCallback()
     
     glEnableClientState(GL_VERTEX_ARRAY);
     glColor3f(1.0, 0.0, 0.0);
-    glDrawArrays(GL_POINTS, 0, mesh_width * mesh_height);
+    glDrawArrays(GL_POINTS, 0, computationCore->mesh_width * computationCore->mesh_height);
     glDisableClientState(GL_VERTEX_ARRAY);
     
     glutSwapBuffers();
@@ -195,22 +198,22 @@ void DisplayCallback()
 
 void KeyboardCallback(unsigned char key, int x, int y)
 {
-	sounidRuntime->keyboard(key, x, y);
+	controls->keyboard(key, x, y);
 }
 
 void MouseCallback(int button, int state, int x, int y)
 {
-	sounidRuntime->mouse(button, state, x, y);
+	controls->mouse(button, state, x, y);
 }
 
 void MotionCallback(int x, int y)
 {
-	sounidRuntime->motion(x, y);
+	controls->motion(x, y);
 }
 
 void TimerCallback(int value)
 {
-	sounidRuntime->timerEvent(value);
+	controls->timerEvent(value);
 }
 
 /**
@@ -236,5 +239,5 @@ void cleanup()
         deleteVBO(&vbo, cuda_vbo_resource);
     }
 
-    delete(sounidRuntime);
+    delete(controls);
 }

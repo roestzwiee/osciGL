@@ -21,10 +21,10 @@
     <ClInclude Include="src\GlutManager.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\oScopeID.h">
+    <ClInclude Include="src\UserInput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserInput.h">
+    <ClInclude Include="src\OsciBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,13 +35,10 @@
     <ClCompile Include="src\GlutManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\oScopeID.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sounID_cpu.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\UserInput.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OsciBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
