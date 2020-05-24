@@ -1,7 +1,7 @@
 #ifndef H_UserControls
 #define H_UserControls
 
-#include "IUserControls.h"
+#include "headers/IUserControls.h"
 #include "GlutManager.h"
 
 class UserControls : public IUserControls

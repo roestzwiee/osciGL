@@ -1,7 +1,7 @@
 #ifndef H_CUDACOMPUTATION
 #define H_CUDACOMPUTATION
 
-#include "IComputation.h"
+#include "headers/IComputation.h"
 
 extern "C"
 void launch_kernel(float4 * pos, unsigned int mesh_width, unsigned int mesh_height, float time);
@@ -15,6 +15,7 @@ public:
 	CudaComputation() {};
 
 public:
+	void fetchInput(GLuint* vbo) override {};
 	void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim) override;
 
 	unsigned int getMeshWidth() override

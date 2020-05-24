@@ -18,6 +18,7 @@ class IComputation
 {
 
 public:
+	virtual void fetchInput(GLuint* vbo) = 0;
 	virtual void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim) = 0;
 
 	virtual unsigned int getMeshWidth() = 0;

@@ -139,6 +139,8 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
  */
 void runCudaInternal(cudaGraphicsResource** vbo_resource)
 {
+	// TODO: OpenGL calls cannot be invoked from a class. create kind of a hook therefore!
+    computationCore->fetchInput(&vbo);
     computationCore->runCuda(vbo_resource, g_fAnim);
 }
 

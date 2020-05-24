@@ -27,10 +27,10 @@
     <ClInclude Include="src\UserControls.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\IComputation.h">
+    <ClInclude Include="src\headers\IComputation.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\IUserControls.h">
+    <ClInclude Include="src\headers\IUserControls.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

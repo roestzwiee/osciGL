@@ -2,8 +2,8 @@
 #ifndef H_GLUTMANAGER
 #define H_GLUTMANAGER
 
-#include "IComputation.h"
-#include "IUserControls.h"
+#include "headers/IComputation.h"
+#include "headers/IUserControls.h"
 
 
 #define MAX(a,b) ((a > b) ? a : b)

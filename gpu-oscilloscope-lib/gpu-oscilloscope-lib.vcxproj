@@ -171,8 +171,8 @@
   <ItemGroup>
     <ClInclude Include="src\CudaComputation.h" />
     <ClInclude Include="src\GlutManager.h" />
-    <ClInclude Include="src\IComputation.h" />
-    <ClInclude Include="src\IUserControls.h" />
+    <ClInclude Include="src\headers\IComputation.h" />
+    <ClInclude Include="src\headers\IUserControls.h" />
     <ClInclude Include="src\OsciBuilder.h" />
     <ClInclude Include="src\UserControls.h" />
   </ItemGroup>

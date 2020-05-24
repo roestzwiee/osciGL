@@ -163,11 +163,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="audio-example.cpp" />
+    <ClCompile Include="AudioComputation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gpu-oscilloscope-lib\gpu-oscilloscope-lib.vcxproj">
       <Project>{018ad1fd-86a2-49eb-95b2-6aace5007e46}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AudioComputation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
