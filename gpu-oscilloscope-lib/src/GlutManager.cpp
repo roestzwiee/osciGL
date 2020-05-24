@@ -27,12 +27,12 @@ bool g_bQAReadback = false;
 /*
  * The C++ implementation of Callbacks
  */
-UserInput * controls;
+IUserControls * controls;
 
 /*
  * The C++ implementation for Computation
  */
-CudaComputation* computationCore;
+IComputation* computationCore;
 
 
 /**
@@ -66,12 +66,12 @@ void initialize(int argc, char* argv[])
     glutMainLoop();
 }
 
-void setComputationCore(CudaComputation* computationCoree)
+void setComputationCore(IComputation* computationCoree)
 {
     computationCore = computationCoree;
 }
 
-void setControls(UserInput* controlss)
+void setControls(IUserControls* controlss)
 {
     controls = controlss;
 }
@@ -123,7 +123,7 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
     glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 
     // initialize buffer object
-    const unsigned int size = computationCore->mesh_width * computationCore->mesh_height * 4 * sizeof(float);
+    const unsigned int size = computationCore->getMeshWidth() * computationCore->getMeshHeigh() * 4 * sizeof(float);
     glBufferData(GL_ARRAY_BUFFER, size, 0, GL_DYNAMIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -175,9 +175,9 @@ void DisplayCallback()
     // set view matrix
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0.0, 0.0, controls->translate_z);
-    glRotatef(controls->rotate_x, 1.0, 0.0, 0.0);
-    glRotatef(controls->rotate_y, 0.0, 1.0, 0.0);
+    glTranslatef(0.0, 0.0, controls->getTranslationInZ());
+    glRotatef(controls->getRotationInX(), 1.0, 0.0, 0.0);
+    glRotatef(controls->getRotationInY(), 0.0, 1.0, 0.0);
     
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -185,7 +185,7 @@ void DisplayCallback()
     
     glEnableClientState(GL_VERTEX_ARRAY);
     glColor3f(1.0, 0.0, 0.0);
-    glDrawArrays(GL_POINTS, 0, computationCore->mesh_width * computationCore->mesh_height);
+    glDrawArrays(GL_POINTS, 0, computationCore->getMeshWidth() * computationCore->getMeshHeigh());
     glDisableClientState(GL_VERTEX_ARRAY);
     
     glutSwapBuffers();

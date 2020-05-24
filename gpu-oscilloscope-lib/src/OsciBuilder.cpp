@@ -1,6 +1,4 @@
 #include "OsciBuilder.h"
-// #include "CudaComputation.h"
-// #include "UserInput.h"
 
 
 void OsciBuilder::setInputExample()
@@ -21,7 +19,7 @@ void OsciBuilder::setComputationInbuild()
 
 void OsciBuilder::setControlsInbuild()
 {
-	setControls(new UserInput);
+	setControls(new UserControls);
 }
 
 void OsciBuilder::initOsci(int argc, char* argv[])

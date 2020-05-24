@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>45</y>
+      <w>90</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>Main</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>243</x>
+      <y>171</y>
+      <w>216</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>GLUT
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>225</y>
+      <w>189</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>Display Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>306</y>
+      <w>189</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Timer Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>333</y>
+      <w>189</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Keyboard Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>360</y>
+      <w>189</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Mouse Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>243</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Cuda Computation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>270</y>
+      <w>153</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Cuda Computation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>432</y>
+      <w>252</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>GlutMainLoop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>153</x>
+      <y>0</y>
+      <w>477</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>First thoughts on Architecture
+--
+bg=orange
+transparency=90
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>81</y>
+      <w>252</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Initialize Cuda</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>108</y>
+      <w>252</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Initialize OpenGL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>225</x>
+      <y>135</y>
+      <w>252</w>
+      <h>297</h>
+    </coordinates>
+    <panel_attributes>OpenGL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>261</x>
+      <y>216</y>
+      <w>351</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>
+bg=red
+transparency=80</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>369</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Runtime</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>693</x>
+      <y>45</y>
+      <w>90</w>
+      <h>477</h>
+    </coordinates>
+    <panel_attributes>*Main*
+bg=gray
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>378</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Timer Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>324</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Keyboard Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>351</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Mouse Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>288</y>
+      <w>180</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>*UserInput*
+bg=blue
+transparency=70</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>648</x>
+      <y>0</y>
+      <w>414</w>
+      <h>549</h>
+    </coordinates>
+    <panel_attributes>First Ideas...
+--
+bg=orange
+transparency=90
+
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>180</y>
+      <w>207</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Initialize Cuda</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>207</y>
+      <w>207</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Initialize OpenGL</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>738</x>
+      <y>135</y>
+      <w>252</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>*Display*
+bg=gray
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>234</y>
+      <w>207</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>Start Main Loop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>261</y>
+      <w>207</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>414</y>
+      <w>180</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>*CudaComputation*
+bg=blue
+transparency=70</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>144</x>
+      <y>594</y>
+      <w>1098</w>
+      <h>549</h>
+    </coordinates>
+    <panel_attributes>Current State
+--
+bg=orange
+transparency=90
+
+layer=-2</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>675</y>
+      <w>153</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>OsciBuilder
+--
++setInputExample
++setInputSource
+
++setComputationInbuild
++setControlsInbuild
+
++initOsci</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>774</x>
+      <y>702</y>
+      <w>252</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>GlutManager
+--
++ initialize(int argc, char* argv[]) -&gt; void
+-initGL(int* argc, char** argv) -&gt; bool
+-createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned vbo_res_flags) -&gt; void
++setControls(UserInput* controls) -&gt; void
++setComputationCore(CudaComputation* computationCoree) -&gt; void
+-runCudaInternal(cudaGraphicsResource** vbo_resource) -&gt; void
+-computeFPS() -&gt; void
+-DisplayCallback() -&gt; void
+-KeyboardCallback(unsigned char key, int x, int y) -&gt; void
+-MouseCallback(int button, int state, int x, int y) -&gt; void
+-MotionCallback(int x, int y) -&gt; void
+-TimerCallback(int value) -&gt; void
+-deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res) -&gt; void
+-cleanup() -&gt; void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

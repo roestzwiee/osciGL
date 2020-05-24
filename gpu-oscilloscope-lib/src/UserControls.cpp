@@ -1,7 +1,6 @@
-#include "UserInput.h"
-#include "GlutManager.h"
+#include "UserControls.h"
 
-void UserInput::keyboard(unsigned char key, int x, int y)
+void UserControls::keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -15,7 +14,7 @@ void UserInput::keyboard(unsigned char key, int x, int y)
     }
 }
 
-void UserInput::mouse(int button, int state, int x, int y)
+void UserControls::mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
     {
@@ -30,7 +29,7 @@ void UserInput::mouse(int button, int state, int x, int y)
     mouse_old_y = y;
 }
 
-void UserInput::motion(int x, int y)
+void UserControls::motion(int x, int y)
 {
     float dx, dy;
     dx = (float)(x - mouse_old_x);
@@ -50,7 +49,7 @@ void UserInput::motion(int x, int y)
     mouse_old_y = y;
 }
 
-void UserInput::timerEvent(int value)
+void UserControls::timerEvent(int value)
 {
     if (glutGetWindow()) 
     {

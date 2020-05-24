@@ -1,34 +1,31 @@
 #ifndef H_CUDACOMPUTATION
 #define H_CUDACOMPUTATION
 
-
-#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-// includes, cuda
-#include <cuda_runtime.h>
-#include <cuda_gl_interop.h>
-
-// Utilities and timing functions
-#include <helper_functions.h>    // includes cuda.h and cuda_runtime_api.h
-
-#include <helper_cuda.h>
-
-//#include "GlutManager.h"
+#include "IComputation.h"
 
 extern "C"
 void launch_kernel(float4 * pos, unsigned int mesh_width, unsigned int mesh_height, float time);
 
-class CudaComputation
+class CudaComputation : public IComputation
 {
+private:
+    const unsigned int mesh_width = 128;
+	const unsigned int mesh_height = 1024;
 public:
 	CudaComputation() {};
 
 public:
-	void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim);
+	void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim) override;
 
-	const unsigned int mesh_width = 128;
-	const unsigned int mesh_height = 1024;
+	unsigned int getMeshWidth() override
+	{
+		return mesh_width;
+	}
+
+	unsigned int getMeshHeigh() override
+	{
+		return mesh_height;
+	}
 
 };
 

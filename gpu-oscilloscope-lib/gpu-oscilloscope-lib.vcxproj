@@ -171,14 +171,16 @@
   <ItemGroup>
     <ClInclude Include="src\CudaComputation.h" />
     <ClInclude Include="src\GlutManager.h" />
+    <ClInclude Include="src\IComputation.h" />
+    <ClInclude Include="src\IUserControls.h" />
     <ClInclude Include="src\OsciBuilder.h" />
-    <ClInclude Include="src\UserInput.h" />
+    <ClInclude Include="src\UserControls.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CudaComputation.cpp" />
     <ClCompile Include="src\GlutManager.cpp" />
     <ClCompile Include="src\OsciBuilder.cpp" />
-    <ClCompile Include="src\UserInput.cpp" />
+    <ClCompile Include="src\UserControls.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="src\sounID.cu">

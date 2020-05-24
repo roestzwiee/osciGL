@@ -21,10 +21,16 @@
     <ClInclude Include="src\GlutManager.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserInput.h">
+    <ClInclude Include="src\OsciBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\OsciBuilder.h">
+    <ClInclude Include="src\UserControls.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IComputation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IUserControls.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,10 +41,10 @@
     <ClCompile Include="src\GlutManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\UserInput.cpp">
+    <ClCompile Include="src\OsciBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\OsciBuilder.cpp">
+    <ClCompile Include="src\UserControls.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

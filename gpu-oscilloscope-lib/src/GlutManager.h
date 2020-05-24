@@ -2,10 +2,9 @@
 #ifndef H_GLUTMANAGER
 #define H_GLUTMANAGER
 
+#include "IComputation.h"
+#include "IUserControls.h"
 
-#include "CudaComputation.h"
-
-#include "UserInput.h"
 
 #define MAX(a,b) ((a > b) ? a : b)
 
@@ -27,8 +26,8 @@ void createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned int vbo_res
 /*
  * Set externals
  */
-void setControls(UserInput * controls);
-void setComputationCore(CudaComputation * computationCoree);
+void setControls(IUserControls * controls);
+void setComputationCore(IComputation * computationCoree);
 
 /*
  * Computation

@@ -1,6 +1,14 @@
 #pragma once
 
+// #include "IComputation.h"
+// #include "IUserControls.h"
+
+
+
 #include "GlutManager.h"
+
+#include "CudaComputation.h"
+#include "UserControls.h"
 
 class OsciBuilder
 {
