@@ -139,8 +139,19 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
  */
 void runCudaInternal(cudaGraphicsResource** vbo_resource)
 {
-	// TODO: OpenGL calls cannot be invoked from a class. create kind of a hook therefore!
-    computationCore->fetchInput(&vbo);
+	// TODO: OpenGL calls cannot be invoked from an other class. create kind of a hook therefore!
+    float* input = computationCore->fetchInput();
+	if(input != nullptr)
+    { 
+	    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	    // initialize buffer object
+	    const unsigned int size = computationCore->getMeshWidth() * computationCore->getMeshHeigh() * 4 * sizeof(float);
+	    glBufferData(GL_ARRAY_BUFFER, size, input, GL_DYNAMIC_DRAW);
+
+	    glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
     computationCore->runCuda(vbo_resource, g_fAnim);
 }
 

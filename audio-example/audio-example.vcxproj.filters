@@ -27,4 +27,7 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="computation.cu" />
+  </ItemGroup>
 </Project>

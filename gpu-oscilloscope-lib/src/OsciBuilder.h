@@ -1,6 +1,6 @@
 #pragma once
 
-// #include "IComputation.h"
+#include "headers/IComputation.h"
 // #include "IUserControls.h"
 
 
@@ -23,6 +23,7 @@ public:
 	__declspec(dllexport) void setControlsInbuild();
 	
 	__declspec(dllexport) void setComputationInbuild();
+	__declspec(dllexport) void setComputation(IComputation* computation);
 	
 	__declspec(dllexport) void initOsci(int argc, char* argv[]);
 	

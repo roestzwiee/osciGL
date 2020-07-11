@@ -17,6 +17,12 @@ void OsciBuilder::setComputationInbuild()
 	setComputationCore(new CudaComputation);
 }
 
+void OsciBuilder::setComputation(IComputation* computation)
+{
+	setComputationCore(computation);
+}
+
+
 void OsciBuilder::setControlsInbuild()
 {
 	setControls(new UserControls);
