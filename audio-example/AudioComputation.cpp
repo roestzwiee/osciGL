@@ -1,5 +1,4 @@
 #include "AudioComputation.h"
-#include "math.h"
 
 AudioComputation::AudioComputation()
 {
@@ -14,13 +13,19 @@ AudioComputation::AudioComputation()
 	//        waveIn[i] = i*i;
 	// }
 	
-    initialize();
+    initializeAudioStream();
 }
 
 AudioComputation::~AudioComputation()
 {
+	
     checkCudaErrors(cudaFree(d_waveIn));
-    delete(waveIn);
+
+    closeAudioStream();
+	
+	delete waveIn;
+
+    printf("all cleared /n");
 }
 
 float* AudioComputation::fetchInput()
@@ -32,30 +37,31 @@ float* AudioComputation::fetchInput()
 
 void AudioComputation::runCuda(cudaGraphicsResource** vbo_resource, float g_fAnim)
 {
-
-    // Call a kernel to create a displayable float4* array from the previously fetched input...
-
-    checkCudaErrors(cudaMemcpy(d_waveIn, waveIn, bufferSize, cudaMemcpyHostToDevice));
+    fetchAudioStream();
 	
+    // Call a kernel to write a displayable float4* array from the previously fetched input...
+
     // map OpenGL buffer object for writing from CUDA
     float4* devPtr;
     size_t num_bytes;
 
-    checkCudaErrors(cudaGraphicsMapResources(1, vbo_resource, nullptr));
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&devPtr, &num_bytes, *vbo_resource));
+	checkCudaErrors(cudaMemcpy(d_waveIn, waveIn, bufferSize, cudaMemcpyHostToDevice));
 
-    launch_kernel_convert(d_waveIn, devPtr, mesh_width, mesh_height, g_fAnim);
+    checkCudaErrors(cudaGraphicsMapResources(1, vbo_resource, nullptr));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(reinterpret_cast<void**>(&devPtr), &num_bytes, *vbo_resource));
+
+    launch_kernel_convert(d_waveIn, devPtr, getCurrentMeshWidth(), mesh_height, g_fAnim);
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, vbo_resource, nullptr));
 	
 }
 
-void AudioComputation::initialize()
+void AudioComputation::initializeAudioStream()
 {
     // Specify recording parameters
     pFormat.wFormatTag = WAVE_FORMAT_PCM;       // simple, uncompressed format
     pFormat.nChannels = 1;                      // 1=mono, 2=stereo
-    pFormat.nSamplesPerSec = sampleRate;        // 44100
+    pFormat.nSamplesPerSec = 44100;             // 44100
     pFormat.nAvgBytesPerSec = sampleRate * 2;   // = nSamplesPerSec * n.Channels * wBitsPerSample/8
     pFormat.nBlockAlign = 2;                    // = n.Channels * wBitsPerSample/8
     pFormat.wBitsPerSample = 16;                // 16 for high quality, 8 for telephone-grade
@@ -96,21 +102,29 @@ void AudioComputation::initialize()
         printf("Failed to start recording");
         return;
     }
+}
+
+void AudioComputation::fetchAudioStream()
+{
 
     // Wait until finished recording
-    do {
-
+    if(result == WAVERR_STILLPLAYING) 
+    {
         printf("Recording...\n");
         result = waveInUnprepareHeader(hWaveIn, &WaveInHdr, sizeof(WAVEHDR));
-    } while (result == WAVERR_STILLPLAYING);
+    }
 
-	if(result != MMSYSERR_NOERROR)
-	{
+    if (result != MMSYSERR_NOERROR)
+    {
         printf("Failed to record");
         return;
-	}
+    }
 
-	waveInClose(hWaveIn);
+}
+
+void AudioComputation::closeAudioStream()
+{
+	 waveInClose(hWaveIn);
 
     printf("Recording finished\n");
 

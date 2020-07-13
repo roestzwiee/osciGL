@@ -97,7 +97,7 @@ bool initGL(int* argc, char** argv)
     }
 
     // default initialization
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
     glDisable(GL_DEPTH_TEST);
 
     // viewport
@@ -106,7 +106,7 @@ bool initGL(int* argc, char** argv)
     // projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1, 10.0);
+    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.001, 10.0);
 
     SDK_CHECK_ERROR_GL();
 
@@ -146,7 +146,7 @@ void runCudaInternal(cudaGraphicsResource** vbo_resource)
 	    glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	    // initialize buffer object
-	    const unsigned int size = computationCore->getMeshWidth() * computationCore->getMeshHeigh() * 4 * sizeof(float);
+	    const unsigned int size = computationCore->getMeshWidth() * computationCore->getCurrentMeshWidth() * 4 * sizeof(float);
 	    glBufferData(GL_ARRAY_BUFFER, size, input, GL_DYNAMIC_DRAW);
 
 	    glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -170,7 +170,7 @@ void computeFPS()
     }
 
     char fps[256];
-    sprintf(fps, "Cuda GL Interop (VBO): %3.1f fps (Max 100Hz)", avgFPS);
+    sprintf_s(fps, "Cuda GL Interop (VBO): %3.1f fps (Max 100Hz)", avgFPS);
     glutSetWindowTitle(fps);
 }
 
@@ -188,17 +188,20 @@ void DisplayCallback()
     // set view matrix
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(0.0, 0.0, controls->getTranslationInZ());
+    glTranslatef(controls->getTranslationInX(), controls->getTranslationInY(), controls->getTranslationInZ());
     glRotatef(controls->getRotationInX(), 1.0, 0.0, 0.0);
     glRotatef(controls->getRotationInY(), 0.0, 1.0, 0.0);
+	
+	
     
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexPointer(4, GL_FLOAT, 0, 0);
     
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColor3f(1.0, 0.0, 0.0);
-    glDrawArrays(GL_POINTS, 0, computationCore->getMeshWidth() * computationCore->getMeshHeigh());
+    glColor3f(1.0, 0.0, 0.0);	
+    glDrawArrays(GL_POINTS, 0, computationCore->getCurrentMeshWidth() * computationCore->getMeshHeigh());
+    //glDrawArrays(GL_POINTS, 0, 1000);
     glDisableClientState(GL_VERTEX_ARRAY);
     
     glutSwapBuffers();
@@ -252,5 +255,7 @@ void cleanup()
         deleteVBO(&vbo, cuda_vbo_resource);
     }
 
-    delete(controls);
+    delete controls;
+    delete computationCore;
+	
 }

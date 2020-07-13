@@ -21,6 +21,15 @@ public:
 	virtual float* fetchInput() = 0;
 	virtual void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim) = 0;
 
+	/**
+	 * Used to actually draw.
+	 */
+	virtual unsigned int getCurrentMeshWidth() = 0;
+
+
+	/**
+	 * Used for allocations.
+	 */
 	virtual unsigned int getMeshWidth() = 0;
 	virtual unsigned int getMeshHeigh() = 0;
 	

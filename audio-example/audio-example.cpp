@@ -18,5 +18,6 @@ int main(int argc, char* argv[])
 	
 	osciBuilder->initOsci(argc, argv);
 
+	delete osciBuilder;
 
 }

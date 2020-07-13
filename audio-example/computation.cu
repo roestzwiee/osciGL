@@ -56,7 +56,7 @@ void launch_kernel_convert(short* input, float4 * pos, unsigned int mesh_width,
     unsigned int mesh_height, float time)
 {
 	// TODO: find a better way to limit the framerate...
-    Sleep(20);
+    //Sleep(5);
 	
     dim3 block(8, 1, 1);
 
@@ -66,7 +66,8 @@ void launch_kernel_convert(short* input, float4 * pos, unsigned int mesh_width,
 	// TODO: Add further validation!
 	if(gridSizeX == 0 || gridSizeY == 0)
 	{
-        printf("Error on grid size!");
+        printf("Error on grid size!\n");
+        return;
 	}
 	
     dim3 grid(gridSizeX, gridSizeY, 1);

@@ -27,6 +27,23 @@ void UserControls::mouse(int button, int state, int x, int y)
 
     mouse_old_x = x;
     mouse_old_y = y;
+
+
+	// TODO: Make values match with z depth in gluPerspective
+    if ((button == 3) || (button == 4)) // It's a wheel event
+    {
+    	if(button == 3)
+        {
+            translate_z = translate_z * 0.9f;
+    	}
+    	else
+    	{
+            translate_z = translate_z * 1.1f;
+        
+    	}
+        printf("Translation in z is: %f", translate_z);
+    }
+
 }
 
 void UserControls::motion(int x, int y)
@@ -37,13 +54,13 @@ void UserControls::motion(int x, int y)
 
     if (mouse_buttons & 1)
     {
-        rotate_x += dy * 0.2f;
-        rotate_y += dx * 0.2f;
+        translate_x -= dx * 0.002f;
+        translate_y += dy * 0.002f;
     }
-    else if (mouse_buttons & 4)
-    {
-        translate_z += dy * 0.01f;
-    }
+    // else if (mouse_buttons & 4)
+    // {
+    //     translate_z += dy * 0.01f;
+    // }
 
     mouse_old_x = x;
     mouse_old_y = y;

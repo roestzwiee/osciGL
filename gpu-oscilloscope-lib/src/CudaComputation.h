@@ -18,6 +18,11 @@ public:
 	float* fetchInput() override { return nullptr; };
 	void runCuda(cudaGraphicsResource** cuda_vbo_resource, float g_fAnim) override;
 
+	unsigned int getCurrentMeshWidth() override
+	{
+		return mesh_width;
+	}
+	
 	unsigned int getMeshWidth() override
 	{
 		return mesh_width;
