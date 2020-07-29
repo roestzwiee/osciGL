@@ -26,6 +26,9 @@ public:
 	__declspec(dllexport) void setComputation(IComputation* computation);
 	
 	__declspec(dllexport) void initOsci(int argc, char* argv[]);
+
+private:
+	GLManager glManager;
 	
 };
 

@@ -31,6 +31,6 @@ void OsciBuilder::setControlsInbuild()
 void OsciBuilder::initOsci(int argc, char* argv[])
 {
 	// TODO: Check if all requirements are met...
-	initialize(argc, argv);
+	glManager.initialize(argc, argv);
 }
 

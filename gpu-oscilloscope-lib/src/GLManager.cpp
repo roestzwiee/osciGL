@@ -44,7 +44,7 @@ IComputation* computationCore;
 /**
  * Initialization Routines
  */
-void initialize(int argc, char* argv[])
+void GLManager::initialize(int argc, char* argv[])
 {	
     // Create the CUTIL timer
     sdkCreateTimer(&timer);
@@ -60,26 +60,22 @@ void initialize(int argc, char* argv[])
         //return -1;
     }
 
-    glfwSetWindowCloseCallback(window, cleanup);
+    //glfwSetWindowCloseCallback(window, cleanup);
 	// glutCloseFunc(cleanup);
+	// glfwSetErrorCallback()
 
     createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
 
-	
-    // run the cuda part
-    runCudaInternal(&cuda_vbo_resource);
-
-    // start rendering mainloop
-    //glutMainLoop();
-    //
-
-    while (!glfwWindowShouldClose(window))
+    // start entering the compute and render main loop
+    while (!glfwWindowShouldClose(window) && controls && computationCore)
     {
         DisplayCallback();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    cleanup(window);
 }
 
 void setComputationCore(IComputation* computationCoree)
@@ -92,7 +88,7 @@ void setControls(IUserControls* controlss)
     controls = controlss;
 }
 
-bool initGL(int* argc, char** argv)
+bool GLManager::initGL(int* argc, char** argv)
 {
 
 
@@ -102,7 +98,7 @@ bool initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(window_width, window_height);
-    glutCreateWindow("Cuda GL Interop (VBO)");
+    //glutCreateWindow("Cuda GL Interop (VBO)");
     glutDisplayFunc(DisplayCallback);
     glutKeyboardFunc(KeyboardCallback);
     glutMouseFunc(MouseCallback);
@@ -126,8 +122,7 @@ bool initGL(int* argc, char** argv)
         return false;
     }
     glfwMakeContextCurrent(window);
-	
-	
+
 	if (!isGLVersionSupported(4, 0))
     {
         fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
@@ -156,7 +151,7 @@ bool initGL(int* argc, char** argv)
     return true;
 }
 
-void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
+void GLManager::createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
     unsigned int vbo_res_flags)
 {
     assert(vbo);
@@ -180,7 +175,7 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
 /**
  * Computation
  */
-void runCudaInternal(cudaGraphicsResource** vbo_resource)
+void GLManager::runCudaInternal(cudaGraphicsResource** vbo_resource)
 {
 	// TODO: OpenGL calls cannot be invoked from an other class. create kind of a hook therefore!
     float* input = computationCore->fetchInput();
@@ -198,7 +193,7 @@ void runCudaInternal(cudaGraphicsResource** vbo_resource)
     computationCore->runCuda(vbo_resource, g_fAnim);
 }
 
-void computeFPS()
+void GLManager::computeFPS()
 {
     frameCount++;
     fpsCount++;
@@ -220,7 +215,7 @@ void computeFPS()
 /**
  * Callbacks
  */
-void DisplayCallback()
+void GLManager::DisplayCallback()
 {
     sdkStartTimer(&timer);
     
@@ -273,7 +268,8 @@ void TimerCallback(int value)
 	controls->timerEvent(value);
 }
 
-void ErrorCallback(int error, const char* description)
+void
+GLManager::ErrorCallback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
 }
@@ -281,7 +277,24 @@ void ErrorCallback(int error, const char* description)
 /**
  * Cleanups
  */
-void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res)
+void GLManager::cleanup(GLFWwindow*)
+{
+	
+    sdkDeleteTimer(&timer);
+
+    if (vbo)
+    {
+        deleteVBO(&vbo, cuda_vbo_resource);
+    }
+
+    glfwTerminate();
+	
+    delete controls;
+    delete computationCore;
+
+}
+
+void GLManager::deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res)
 {
     // unregister this buffer object with CUDA
     checkCudaErrors(cudaGraphicsUnregisterResource(vbo_res));
@@ -290,19 +303,4 @@ void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res)
     glDeleteBuffers(1, vbo);
 
     *vbo = 0;
-}
-
-void cleanup(GLFWwindow*)
-{
-    sdkDeleteTimer(&timer);
-
-    if (vbo)
-    {
-        deleteVBO(&vbo, cuda_vbo_resource);
-    }
-
-    delete controls;
-    delete computationCore;
-
-    glfwTerminate();	
 }

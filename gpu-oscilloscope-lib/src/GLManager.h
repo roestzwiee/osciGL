@@ -16,12 +16,6 @@
 const unsigned int window_width = 512;
 const unsigned int window_height = 512;
 
-/*
- * Common initialization
- */
-void initialize(int argc, char* argv[]);
-bool initGL(int* argc, char** argv);
-void createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned int vbo_res_flags);
 
 /*
  * Set externals
@@ -29,11 +23,7 @@ void createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned int vbo_res
 void setControls(IUserControls * controls);
 void setComputationCore(IComputation * computationCoree);
 
-/*
- * Computation
- */
-void runCudaInternal(struct cudaGraphicsResource** vbo_resource);
-void computeFPS();
+
 
 /*
  * Forward declarations for GLUT Callbacks
@@ -45,12 +35,45 @@ void MotionCallback(int x, int y);
 void TimerCallback(int value);
 
 // new: 
-void ErrorCallback(int error, const char* description);
 
-/*
- * Cleanups
- */
-void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res);
-void cleanup(GLFWwindow *);
+
+
+
+class GLManager
+{
+public:
+	GLManager() {};
+
+	void initialize(int argc, char* argv[]);
+private:
+	
+	/*
+	 * Common initialization
+	 */
+	bool initGL(int* argc, char** argv);
+	void createVBO(GLuint* vbo, cudaGraphicsResource** vbo_res, unsigned int vbo_res_flags);
+
+	/*
+	 * Render
+	 */
+	void DisplayCallback();
+
+	/**
+	 * Callbacks
+	 */
+	void ErrorCallback(int error, const char* description);
+	
+	/*
+	 * Computation
+	 */
+	void runCudaInternal(struct cudaGraphicsResource** vbo_resource);
+	void computeFPS();
+	
+	/*
+	 * Cleanups
+	 */
+	void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res);
+	void cleanup(GLFWwindow *);
+};
 
 #endif
