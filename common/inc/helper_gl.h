@@ -169,9 +169,12 @@ namespace __HelperGL {
     static int isGLVersionSupported(unsigned reqMajor, unsigned reqMinor)
     {
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-        if (glewInit() != GLEW_OK)
+
+        GLenum initResult = glewInit();
+    	
+        if (initResult != GLEW_OK)
         {
-            std::cerr << "glewInit() failed!" << std::endl;
+            std::cerr << "glewInit() failed: " << initResult << std::endl;
             return 0;
         }
 #endif

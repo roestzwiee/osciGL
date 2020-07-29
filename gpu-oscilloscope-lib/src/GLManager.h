@@ -44,10 +44,13 @@ void MouseCallback(int button, int state, int x, int y);
 void MotionCallback(int x, int y);
 void TimerCallback(int value);
 
+// new: 
+void ErrorCallback(int error, const char* description);
+
 /*
  * Cleanups
  */
 void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res);
-void cleanup();
+void cleanup(GLFWwindow *);
 
 #endif

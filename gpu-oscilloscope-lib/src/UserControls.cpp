@@ -1,14 +1,16 @@
 #include "UserControls.h"
+#include <cstdio>
 
 void UserControls::keyboard(unsigned char key, int x, int y)
 {
+	// FIXME
     switch (key)
     {
     case (27):
 #if defined(__APPLE__) || defined(MACOSX)
         exit(EXIT_SUCCESS);
 #else
-        glutDestroyWindow(glutGetWindow());
+        //glfwDestroyWindow(window);
         return;
 #endif
     }
@@ -16,14 +18,15 @@ void UserControls::keyboard(unsigned char key, int x, int y)
 
 void UserControls::mouse(int button, int state, int x, int y)
 {
-    if (state == GLUT_DOWN)
-    {
-        mouse_buttons |= 1 << button;
-    }
-    else if (state == GLUT_UP)
-    {
-        mouse_buttons = 0;
-    }
+	
+    // if (state == GLFW_MOUSE_BUTTON_LEFT)
+    // {
+    //     mouse_buttons |= 1 << button;
+    // }
+    // else if (state == GLF)
+    // {
+    //     mouse_buttons = 0;
+    // }
 
     mouse_old_x = x;
     mouse_old_y = y;
@@ -68,9 +71,10 @@ void UserControls::motion(int x, int y)
 
 void UserControls::timerEvent(int value)
 {
-    if (glutGetWindow()) 
-    {
-        glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, TimerCallback, 0);
-    }
+	// FIXME!
+    // if (glutGetWindow()) 
+    // {
+    //     glutPostRedisplay();
+    //     glutTimerFunc(REFRESH_DELAY, TimerCallback, 0);
+    // }
 }

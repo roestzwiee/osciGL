@@ -1,4 +1,4 @@
-#include "GlutManager.h"
+#include "GLManager.h"
 
 /**
  * CUDA Variables
@@ -24,6 +24,12 @@ unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
 bool g_bQAReadback = false;
 
+/**
+ * GLFW Window
+ */
+GLFWwindow* window;
+GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+GLint mvp_location, vpos_location, vcol_location;
 /*
  * The C++ implementation of Callbacks
  */
@@ -54,7 +60,8 @@ void initialize(int argc, char* argv[])
         //return -1;
     }
 
-    glutCloseFunc(cleanup);
+    glfwSetWindowCloseCallback(window, cleanup);
+	// glutCloseFunc(cleanup);
 
     createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
 
@@ -63,7 +70,16 @@ void initialize(int argc, char* argv[])
     runCudaInternal(&cuda_vbo_resource);
 
     // start rendering mainloop
-    glutMainLoop();
+    //glutMainLoop();
+    //
+
+    while (!glfwWindowShouldClose(window))
+    {
+        DisplayCallback();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 }
 
 void setComputationCore(IComputation* computationCoree)
@@ -78,6 +94,11 @@ void setControls(IUserControls* controlss)
 
 bool initGL(int* argc, char** argv)
 {
+
+
+    //TODO: further callbacks glfwSetMouseButtonCallback(MouseCallback);
+	
+	/*
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(window_width, window_height);
@@ -87,15 +108,34 @@ bool initGL(int* argc, char** argv)
     glutMouseFunc(MouseCallback);
     glutMotionFunc(MotionCallback);
     glutTimerFunc(REFRESH_DELAY, TimerCallback, 0);
+    */
 
     // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0))
+	if (!glfwInit())
+    {
+        fprintf(stderr, "ERROR: Cannot initialize GLFW.");
+        fflush(stderr);
+        return false;
+    }
+	
+    window = glfwCreateWindow(640, 480, "My Title", NULL, NULL);
+    if (!window)
+    {
+        fprintf(stderr, "ERROR: Cannot create OpenGL window.");
+        fflush(stderr);
+        return false;
+    }
+    glfwMakeContextCurrent(window);
+	
+	
+	if (!isGLVersionSupported(4, 0))
     {
         fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
         fflush(stderr);
         return false;
     }
 
+	
     // default initialization
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glDisable(GL_DEPTH_TEST);
@@ -106,8 +146,11 @@ bool initGL(int* argc, char** argv)
     // projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.001, 10.0);
 
+    // fixme
+	gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.001, 10.0);
+
+	
     SDK_CHECK_ERROR_GL();
 
     return true;
@@ -170,8 +213,8 @@ void computeFPS()
     }
 
     char fps[256];
-    sprintf_s(fps, "Cuda GL Interop (VBO): %3.1f fps (Max 100Hz)", avgFPS);
-    glutSetWindowTitle(fps);
+    sprintf_s(fps, "osciGL Beta: %3.1f fps (Max 100Hz)", avgFPS);
+    glfwSetWindowTitle(window, fps);
 }
 
 /**
@@ -204,8 +247,6 @@ void DisplayCallback()
     //glDrawArrays(GL_POINTS, 0, 1000);
     glDisableClientState(GL_VERTEX_ARRAY);
     
-    glutSwapBuffers();
-    
     g_fAnim += 0.01f;
     
     sdkStopTimer(&timer);
@@ -232,6 +273,11 @@ void TimerCallback(int value)
 	controls->timerEvent(value);
 }
 
+void ErrorCallback(int error, const char* description)
+{
+    fprintf(stderr, "Error: %s\n", description);
+}
+
 /**
  * Cleanups
  */
@@ -246,7 +292,7 @@ void deleteVBO(GLuint* vbo, cudaGraphicsResource* vbo_res)
     *vbo = 0;
 }
 
-void cleanup()
+void cleanup(GLFWwindow*)
 {
     sdkDeleteTimer(&timer);
 
@@ -257,5 +303,6 @@ void cleanup()
 
     delete controls;
     delete computationCore;
-	
+
+    glfwTerminate();	
 }

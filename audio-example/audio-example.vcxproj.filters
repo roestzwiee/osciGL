@@ -30,4 +30,7 @@
   <ItemGroup>
     <CudaCompile Include="computation.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>

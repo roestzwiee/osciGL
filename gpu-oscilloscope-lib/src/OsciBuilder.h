@@ -5,7 +5,7 @@
 
 
 
-#include "GlutManager.h"
+#include "GLManager.h"
 
 #include "CudaComputation.h"
 #include "UserControls.h"

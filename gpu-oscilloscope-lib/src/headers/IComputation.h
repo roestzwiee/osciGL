@@ -2,7 +2,7 @@
 #define H_IComputation
 
 #include <helper_gl.h>
-#include <GL/freeglut.h>
+#include <GLFW/glfw3.h>
 
 // includes, cuda
 #include <cuda_runtime.h>

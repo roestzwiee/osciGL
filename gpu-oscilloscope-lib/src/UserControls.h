@@ -2,7 +2,6 @@
 #define H_UserControls
 
 #include "headers/IUserControls.h"
-#include "GlutManager.h"
 
 class UserControls : public IUserControls
 {
