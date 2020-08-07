@@ -14,18 +14,18 @@ void OsciBuilder::setInputSource()
 
 void OsciBuilder::setComputationInbuild()
 {
-	setComputationCore(new CudaComputation);
+	glManager.setComputationCore(new CudaComputation);
 }
 
 void OsciBuilder::setComputation(IComputation* computation)
 {
-	setComputationCore(computation);
+	glManager.setComputationCore(computation);
 }
 
 
 void OsciBuilder::setControlsInbuild()
 {
-	setControls(new UserControls);
+	glManager.setControls(new UserControls);
 }
 
 void OsciBuilder::initOsci(int argc, char* argv[])

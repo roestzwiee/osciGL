@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\CallbackMapper.h" />
     <ClInclude Include="src\CudaComputation.h" />
     <ClInclude Include="src\GLManager.h" />
     <ClInclude Include="src\headers\IComputation.h" />

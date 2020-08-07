@@ -1,95 +1,5 @@
 #include "GLManager.h"
-
-/**
- * CUDA Variables
- */
-GLuint vbo;
-struct cudaGraphicsResource* cuda_vbo_resource;
-void* d_vbo_buffer = NULL;
-StopWatchInterface* timer = NULL;
-
-/**
- * TheTime
- */
-float g_fAnim = 0.0;
-
-/**
- * Auto verification code
- */
-int fpsCount = 0;        // FPS count for averaging
-int fpsLimit = 1;        // FPS limit for sampling
-int g_Index = 0;
-float avgFPS = 0.0f;
-unsigned int frameCount = 0;
-unsigned int g_TotalErrors = 0;
-bool g_bQAReadback = false;
-
-/**
- * GLFW Window
- */
-GLFWwindow* window;
-GLuint vertex_buffer, vertex_shader, fragment_shader, program;
-GLint mvp_location, vpos_location, vcol_location;
-/*
- * The C++ implementation of Callbacks
- */
-IUserControls * controls;
-
-/*
- * The C++ implementation for Computation
- */
-IComputation* computationCore;
-
-/*
- * Outsourced functionality
- */
-
-void setComputationCore(IComputation* computationCoree)
-{
-    computationCore = computationCoree;
-}
-
-void setControls(IUserControls* controlss)
-{
-    controls = controlss;
-}
-
-/*
- * Callback implementation
- */
-void ErrorCallback(int error, const char* description)
-{
-    fprintf(stderr, "Error: %s\n", description);
-}
-
-void WindowResizeCallback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    controls->keyboard(key, scancode, action, mods);
-}
-
-void MouseCallback(GLFWwindow* window, int button, int action, int mods)
-{
-    double x, y;
-
-    glfwGetCursorPos(window, &x, &y);
-
-    controls->mouse(button, action, mods);
-}
-
-void MotionCallback(GLFWwindow* window, double x, double y)
-{
-    controls->motion(x, y);
-}
-
-void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    controls->scroll(xoffset, yoffset);
-}
+#include "CallbackMapper.h"
 
 
 /**
@@ -144,6 +54,8 @@ bool GLManager::initGL(int* argc, char** argv)
     }
     glfwMakeContextCurrent(window);
 
+    AddCallbackMapping(window, this);	
+	
     glfwSetErrorCallback(ErrorCallback);
     glfwSetFramebufferSizeCallback(window, WindowResizeCallback);
 	
@@ -199,6 +111,16 @@ void GLManager::createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(vbo_res, *vbo, vbo_res_flags));
 
     SDK_CHECK_ERROR_GL();
+}
+
+void GLManager::setComputationCore(IComputation* computationCore)
+{
+    this->computationCore = computationCore;
+}
+
+void GLManager::setControls(IUserControls* controls)
+{
+    this->controls = controls;
 }
 
 /**
@@ -288,6 +210,8 @@ void GLManager::cleanup(GLFWwindow*)
     }
 
     glfwTerminate();
+
+    RemoveCallbackMapping(window);
 	
     delete controls;
     delete computationCore;

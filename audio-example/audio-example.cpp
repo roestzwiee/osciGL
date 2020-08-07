@@ -7,15 +7,11 @@
 int main(int argc, char* argv[])
 {
 	
-	OsciBuilder * osciBuilder = new OsciBuilder();
+	OsciBuilder osciBuilder;
 
-	//osciBuilder->setComputationInbuild();
-
-	osciBuilder->setComputation(new AudioComputation);
-	osciBuilder->setControlsInbuild();
+	osciBuilder.setComputation(new AudioComputation);
+	osciBuilder.setControlsInbuild();
 	
-	osciBuilder->initOsci(argc, argv);
-
-	delete osciBuilder;
+	osciBuilder.initOsci(argc, argv);
 
 }
