@@ -9,19 +9,19 @@ public:
 	/*
 	 * Callback Functions
 	 */
-	virtual void keyboard(unsigned char key, int x, int y) = 0;
-	virtual void mouse(int button, int state, int x, int y) = 0;
-	virtual void motion(int x, int y) = 0;
+	virtual void keyboard(int key, int scanCode, int action, int mods) = 0;
+	virtual void mouse(int button, int action, int mods) = 0;
+	virtual void scroll(double xOffset, double yOffset) = 0;
+	virtual void motion(double x, double y) = 0;
 	virtual void timerEvent(int value) = 0;
 
-	virtual float getTranslationInX() = 0;
-	virtual float getTranslationInY() = 0;
-	virtual float getTranslationInZ() = 0;
+	virtual double getTranslationInX() = 0;
+	virtual double getTranslationInY() = 0;
+	virtual double getTranslationInZ() = 0;
 
 
-	virtual float getRotationInX() = 0;
-	virtual float getRotationInY() = 0;
-
+	virtual double getRotationInX() = 0;
+	virtual double getRotationInY() = 0;
 
 };
 

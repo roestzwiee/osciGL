@@ -40,6 +40,57 @@ IUserControls * controls;
  */
 IComputation* computationCore;
 
+/*
+ * Outsourced functionality
+ */
+
+void setComputationCore(IComputation* computationCoree)
+{
+    computationCore = computationCoree;
+}
+
+void setControls(IUserControls* controlss)
+{
+    controls = controlss;
+}
+
+/*
+ * Callback implementation
+ */
+void ErrorCallback(int error, const char* description)
+{
+    fprintf(stderr, "Error: %s\n", description);
+}
+
+void WindowResizeCallback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    controls->keyboard(key, scancode, action, mods);
+}
+
+void MouseCallback(GLFWwindow* window, int button, int action, int mods)
+{
+    double x, y;
+
+    glfwGetCursorPos(window, &x, &y);
+
+    controls->mouse(button, action, mods);
+}
+
+void MotionCallback(GLFWwindow* window, double x, double y)
+{
+    controls->motion(x, y);
+}
+
+void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    controls->scroll(xoffset, yoffset);
+}
+
 
 /**
  * Initialization Routines
@@ -60,10 +111,6 @@ void GLManager::initialize(int argc, char* argv[])
         //return -1;
     }
 
-    //glfwSetWindowCloseCallback(window, cleanup);
-	// glutCloseFunc(cleanup);
-	// glfwSetErrorCallback()
-
     createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
 
     // start entering the compute and render main loop
@@ -78,34 +125,8 @@ void GLManager::initialize(int argc, char* argv[])
     cleanup(window);
 }
 
-void setComputationCore(IComputation* computationCoree)
-{
-    computationCore = computationCoree;
-}
-
-void setControls(IUserControls* controlss)
-{
-    controls = controlss;
-}
-
 bool GLManager::initGL(int* argc, char** argv)
 {
-
-
-    //TODO: further callbacks glfwSetMouseButtonCallback(MouseCallback);
-	
-	/*
-    glutInit(argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(window_width, window_height);
-    //glutCreateWindow("Cuda GL Interop (VBO)");
-    glutDisplayFunc(DisplayCallback);
-    glutKeyboardFunc(KeyboardCallback);
-    glutMouseFunc(MouseCallback);
-    glutMotionFunc(MotionCallback);
-    glutTimerFunc(REFRESH_DELAY, TimerCallback, 0);
-    */
-
     // initialize necessary OpenGL extensions
 	if (!glfwInit())
     {
@@ -122,6 +143,14 @@ bool GLManager::initGL(int* argc, char** argv)
         return false;
     }
     glfwMakeContextCurrent(window);
+
+    glfwSetErrorCallback(ErrorCallback);
+    glfwSetFramebufferSizeCallback(window, WindowResizeCallback);
+	
+    glfwSetKeyCallback(window, KeyboardCallback);
+    glfwSetMouseButtonCallback(window, MouseCallback);
+    glfwSetCursorPosCallback(window, MotionCallback);
+    glfwSetScrollCallback(window, ScrollCallback);
 
 	if (!isGLVersionSupported(4, 0))
     {
@@ -226,12 +255,10 @@ void GLManager::DisplayCallback()
     // set view matrix
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslatef(controls->getTranslationInX(), controls->getTranslationInY(), controls->getTranslationInZ());
-    glRotatef(controls->getRotationInX(), 1.0, 0.0, 0.0);
-    glRotatef(controls->getRotationInY(), 0.0, 1.0, 0.0);
+    glTranslated(controls->getTranslationInX(), controls->getTranslationInY(), controls->getTranslationInZ());
+    glRotated(controls->getRotationInX(), 1.0, 0.0, 0.0);
+    glRotated(controls->getRotationInY(), 0.0, 1.0, 0.0);
 	
-	
-    
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexPointer(4, GL_FLOAT, 0, 0);
@@ -239,39 +266,12 @@ void GLManager::DisplayCallback()
     glEnableClientState(GL_VERTEX_ARRAY);
     glColor3f(1.0, 0.0, 0.0);	
     glDrawArrays(GL_POINTS, 0, computationCore->getCurrentMeshWidth() * computationCore->getMeshHeigh());
-    //glDrawArrays(GL_POINTS, 0, 1000);
     glDisableClientState(GL_VERTEX_ARRAY);
     
     g_fAnim += 0.01f;
     
     sdkStopTimer(&timer);
     computeFPS();
-}
-
-void KeyboardCallback(unsigned char key, int x, int y)
-{
-	controls->keyboard(key, x, y);
-}
-
-void MouseCallback(int button, int state, int x, int y)
-{
-	controls->mouse(button, state, x, y);
-}
-
-void MotionCallback(int x, int y)
-{
-	controls->motion(x, y);
-}
-
-void TimerCallback(int value)
-{
-	controls->timerEvent(value);
-}
-
-void
-GLManager::ErrorCallback(int error, const char* description)
-{
-    fprintf(stderr, "Error: %s\n", description);
 }
 
 /**

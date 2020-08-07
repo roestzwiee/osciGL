@@ -13,41 +13,42 @@ private:
 	/**
 	 * Mouse Controls
 	 */
-	int mouse_old_x, mouse_old_y;
-	int mouse_buttons = 0;
-	float rotate_x = 0.0, rotate_y = 0.0;
-	float translate_x = 0.0, translate_y = 0.0, translate_z = -3.0;
+	double mouse_old_x = 0, mouse_old_y = 0;
+	int active_mouse_buttons = 0;
+	double rotate_x = 0.0, rotate_y = 0.0;
+	double translate_x = 0.0, translate_y = 0.0, translate_z = -3.0;
 
 public: 
 	/*
 	 * Callback Functions
 	 */	
-	void keyboard(unsigned char key, int x, int y) override;
-	void mouse(int button, int state, int x, int y) override;
-	void motion(int x, int y) override;
+	void keyboard(int key, int scanCode, int action, int mods) override;
+	void mouse(int button, int action, int mods) override;
+	void motion(double x, double y) override;
+	void scroll(double xOffset, double yOffset) override;
 	void timerEvent(int value) override;
 
-	float getTranslationInX() override
+	double getTranslationInX() override
 	{
 		return translate_x;
 	}
 
-	float getTranslationInY() override
+	double getTranslationInY() override
 	{
 		return translate_y;
 	}
 
-	float getTranslationInZ() override
+	double getTranslationInZ() override
 	{
 		return translate_z;
 	}
 	
-	float getRotationInX() override
+	double getRotationInX() override
 	{
 		return rotate_x;
 	}
 
-	float getRotationInY() override
+	double getRotationInY() override
 	{
 		return rotate_y;
 	}

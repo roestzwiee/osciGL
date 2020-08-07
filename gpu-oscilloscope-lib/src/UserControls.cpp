@@ -1,73 +1,60 @@
 #include "UserControls.h"
 #include <cstdio>
 
-void UserControls::keyboard(unsigned char key, int x, int y)
+// hard coupling to glfw3.h only needed cuz i'm to lazy to define keys by my own
+// copy key definitions to get rid of it!
+#include <GLFW/glfw3.h>
+#include <cstdlib>
+
+void UserControls::keyboard(int key, int scancode, int action, int mods)
 {
-	// FIXME
     switch (key)
     {
-    case (27):
-#if defined(__APPLE__) || defined(MACOSX)
+    case GLFW_KEY_ESCAPE:
         exit(EXIT_SUCCESS);
-#else
-        //glfwDestroyWindow(window);
-        return;
-#endif
     }
 }
 
-void UserControls::mouse(int button, int state, int x, int y)
+void UserControls::mouse(int button, int action, int mods)
 {
 	
-    // if (state == GLFW_MOUSE_BUTTON_LEFT)
-    // {
-    //     mouse_buttons |= 1 << button;
-    // }
-    // else if (state == GLF)
-    // {
-    //     mouse_buttons = 0;
-    // }
-
-    mouse_old_x = x;
-    mouse_old_y = y;
-
-
-	// TODO: Make values match with z depth in gluPerspective
-    if ((button == 3) || (button == 4)) // It's a wheel event
+    if(action == GLFW_PRESS)
     {
-    	if(button == 3)
-        {
-            translate_z = translate_z * 0.9f;
-    	}
-    	else
-    	{
-            translate_z = translate_z * 1.1f;
-        
-    	}
-        printf("Translation in z is: %f", translate_z);
+        active_mouse_buttons |= 1 << button;
+    	
+    } else if (action == GLFW_RELEASE)
+    {
+        active_mouse_buttons = 0;
     }
 
 }
 
-void UserControls::motion(int x, int y)
+void UserControls::motion(double x, double y)
 {
-    float dx, dy;
-    dx = (float)(x - mouse_old_x);
-    dy = (float)(y - mouse_old_y);
+	if(active_mouse_buttons & 1 << GLFW_MOUSE_BUTTON_LEFT)
+	{
+		double dx, dy;
+	    dx = x - mouse_old_x;
+	    dy = y - mouse_old_y;
 
-    if (mouse_buttons & 1)
-    {
-        translate_x -= dx * 0.002f;
-        translate_y += dy * 0.002f;
-    }
-    // else if (mouse_buttons & 4)
-    // {
-    //     translate_z += dy * 0.01f;
-    // }
+	    translate_x -= dx * 0.002f;
+	    translate_y += dy * 0.002f;
+	}
 
     mouse_old_x = x;
     mouse_old_y = y;
 }
+
+void UserControls::scroll(double xOffset, double yOffset)
+{
+    const double translate_z_new = translate_z + yOffset * 0.2;
+	
+    if (-0.1 > translate_z_new && translate_z_new > -10)
+    {
+        translate_z = translate_z_new;
+    }
+}
+
 
 void UserControls::timerEvent(int value)
 {

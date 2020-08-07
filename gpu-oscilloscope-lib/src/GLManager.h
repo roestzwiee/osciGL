@@ -16,28 +16,22 @@
 const unsigned int window_width = 512;
 const unsigned int window_height = 512;
 
-
 /*
  * Set externals
  */
 void setControls(IUserControls * controls);
 void setComputationCore(IComputation * computationCoree);
 
-
-
 /*
- * Forward declarations for GLUT Callbacks
+ * Forward declarations for GLFW Callbacks
  */
-void DisplayCallback();
-void KeyboardCallback(unsigned char key, int x, int y);
-void MouseCallback(int button, int state, int x, int y);
-void MotionCallback(int x, int y);
-void TimerCallback(int value);
+void KeyboardCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void MouseCallback(GLFWwindow* window, int button, int action, int mods);
+void MotionCallback(GLFWwindow* window, double x, double y);
+void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
-// new: 
-
-
-
+void WindowResizeCallback(GLFWwindow* window, int width, int height);
+void ErrorCallback(int error, const char* description);
 
 class GLManager
 {
@@ -57,11 +51,6 @@ private:
 	 * Render
 	 */
 	void DisplayCallback();
-
-	/**
-	 * Callbacks
-	 */
-	void ErrorCallback(int error, const char* description);
 	
 	/*
 	 * Computation
