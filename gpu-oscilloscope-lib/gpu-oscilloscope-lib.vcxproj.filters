@@ -15,16 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\CudaComputation.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\OsciBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\UserControls.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="src\headers\IComputation.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\headers\IUserControls.h">
@@ -36,11 +30,14 @@
     <ClInclude Include="src\CallbackMapper.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="src\headers\ICudaInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExampleInput.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CudaComputation.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\OsciBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

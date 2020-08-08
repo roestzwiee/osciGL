@@ -1,13 +1,13 @@
 #pragma once
 
-#include "headers/IComputation.h"
+#include "headers/ICudaInput.h"
 // #include "IUserControls.h"
 
 
 
 #include "GLManager.h"
 
-#include "CudaComputation.h"
+#include "ExampleInput.h"
 #include "UserControls.h"
 
 class OsciBuilder
@@ -23,7 +23,7 @@ public:
 	__declspec(dllexport) void setControlsInbuild();
 	
 	__declspec(dllexport) void setComputationInbuild();
-	__declspec(dllexport) void setComputation(IComputation* computation);
+	__declspec(dllexport) void setComputation(ICudaInput* computation);
 	
 	__declspec(dllexport) void initOsci(int argc, char* argv[]);
 

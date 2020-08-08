@@ -37,8 +37,8 @@ void UserControls::motion(double x, double y)
 	    dx = x - mouse_old_x;
 	    dy = y - mouse_old_y;
 
-	    translate_x -= dx * 0.002f;
-	    translate_y += dy * 0.002f;
+	    translate_x -= dx * -0.002f;
+	    translate_y += dy * -0.002f;
 	}
 
     mouse_old_x = x;

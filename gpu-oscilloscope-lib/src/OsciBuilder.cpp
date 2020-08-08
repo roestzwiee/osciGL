@@ -14,10 +14,10 @@ void OsciBuilder::setInputSource()
 
 void OsciBuilder::setComputationInbuild()
 {
-	glManager.setComputationCore(new CudaComputation);
+	glManager.setComputationCore(new ExampleInput);
 }
 
-void OsciBuilder::setComputation(IComputation* computation)
+void OsciBuilder::setComputation(ICudaInput* computation)
 {
 	glManager.setComputationCore(computation);
 }

@@ -5,10 +5,11 @@
 
 class UserControls : public IUserControls
 {
-	
 public:
-	UserControls(){};
-	
+	UserControls()
+	{
+	};
+
 private:
 	/**
 	 * Mouse Controls
@@ -18,10 +19,10 @@ private:
 	double rotate_x = 0.0, rotate_y = 0.0;
 	double translate_x = 0.0, translate_y = 0.0, translate_z = -3.0;
 
-public: 
+public:
 	/*
 	 * Callback Functions
-	 */	
+	 */
 	void keyboard(int key, int scanCode, int action, int mods) override;
 	void mouse(int button, int action, int mods) override;
 	void motion(double x, double y) override;
@@ -42,7 +43,7 @@ public:
 	{
 		return translate_z;
 	}
-	
+
 	double getRotationInX() override
 	{
 		return rotate_x;
@@ -52,8 +53,6 @@ public:
 	{
 		return rotate_y;
 	}
-
-	
 };
 
 #endif

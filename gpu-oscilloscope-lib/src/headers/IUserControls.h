@@ -3,9 +3,8 @@
 #pragma once
 class IUserControls
 {
-
 public:
-	
+
 	/*
 	 * Callback Functions
 	 */
@@ -22,7 +21,6 @@ public:
 
 	virtual double getRotationInX() = 0;
 	virtual double getRotationInY() = 0;
-
 };
 
 #endif

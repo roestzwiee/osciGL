@@ -172,15 +172,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\CallbackMapper.h" />
-    <ClInclude Include="src\CudaComputation.h" />
+    <ClInclude Include="src\ExampleInput.h" />
     <ClInclude Include="src\GLManager.h" />
-    <ClInclude Include="src\headers\IComputation.h" />
+    <ClInclude Include="src\headers\ICudaInput.h" />
     <ClInclude Include="src\headers\IUserControls.h" />
     <ClInclude Include="src\OsciBuilder.h" />
     <ClInclude Include="src\UserControls.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CudaComputation.cpp" />
     <ClCompile Include="src\GLManager.cpp" />
     <ClCompile Include="src\OsciBuilder.cpp" />
     <ClCompile Include="src\UserControls.cpp" />
