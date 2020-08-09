@@ -10,40 +10,33 @@ Nowadays this means that increddible amounts of samples can be added, moved, tra
 
 [comment]: <> (add calculation about memory consumption here)
 
-The facing principle of osciGL beside the heavy use of GPU is memory management. Therefore written partly in C but mostly in C++ osciGL tries to tying down memory duplication to its lowest level. 
+The facing principle of osciGL beside the heavy use of GPU is memory management. Therefore written partly in C but mostly in C++ osciGL tries to tie down memory duplication to its lowest level. 
 
-osciGL shall make applied science more simple by taking infrastuctural and technical issues away from the user. When finished, maybe there is also an API for Python, Rust or Go available.
+osciGL shall make applied science more simple by taking infrastuctural and technical issues away from the user. When finished, maybe there can also be a binding for Python, Rust or Go available.
 
 ## Current State
-osciGL is still in development and its current only devotee is me. 
+osciGL is still in its most early development stages. 
 
 To be able to reach a wide amount of users osciGL is tried to be implemented as optional and modular as possible. A simple API together with small cut interfaces and highly extendible abstract classes shall provide an readable and conclusive environment for digital data processing. 
 
+## Currently in Work
+
+### Improved Zooming & Scales and Metrics
+- get familiar with the non existing camera concept
+see: https://learnopengl.com/Getting-started/Camera
+
+### Evaluate Window Toolkits
+- done! GLFW it is!
 
 ## Features In Development
 
-### Data Processing Pipe
-
-#### Fast Fourier Transformation
-#### Realtime Operation Interpreter
-
-### Rendering Choices
-#### Imaging Support
-##### Camera as Example Input Source
-##### Image Renderer  
-#### 2nd View
-
-### Context Menu support
-#### Switching between Pipes
-
-
-### Improved Zooming
-
-### Scales and Metrics
-
-## Technical Tasks
-
-### Evaluate Window Toolkits
-https://www.opengl.org/resources/libraries/windowtoolkits/
-
-
+- Data Processing Pipe
+    - Fast Fourier Transformation
+    - Realtime Operation Interpreter
+- Rendering Choices
+    - Imaging Support
+        - Camera as Example Input Source
+        - Image Renderer  
+    - 2nd View (almost done not yet tested)
+- Context Menu support
+    - Switching between Pipes
