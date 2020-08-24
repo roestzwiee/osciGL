@@ -1,14 +1,13 @@
 #ifndef H_UserControls
 #define H_UserControls
 
-#include "headers/IUserControls.h"
+#include "../Headers/IUserControls.h"
+#include <string>
 
 class UserControls : public IUserControls
 {
 public:
-	UserControls()
-	{
-	};
+	UserControls() = default;
 
 private:
 	/**

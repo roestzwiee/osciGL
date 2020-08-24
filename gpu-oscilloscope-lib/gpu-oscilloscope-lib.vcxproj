@@ -171,21 +171,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\CallbackMapper.h" />
-    <ClInclude Include="src\ExampleInput.h" />
+    <ClInclude Include="src\UserInterfaces\ConsoleView.h" />
+    <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRender.h" />
+    <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.h" />
+    <ClInclude Include="src\UserInterfaces\CallbackMapper.h" />
+    <ClInclude Include="src\Examples\ExampleInput.h" />
     <ClInclude Include="src\GLManager.h" />
-    <ClInclude Include="src\headers\ICudaInput.h" />
-    <ClInclude Include="src\headers\IUserControls.h" />
+    <ClInclude Include="src\Headers\ICudaInput.h" />
+    <ClInclude Include="src\Headers\IUserControls.h" />
     <ClInclude Include="src\OsciBuilder.h" />
-    <ClInclude Include="src\UserControls.h" />
+    <ClInclude Include="src\UserInterfaces\UserControls.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserInterfaces\ConsoleView.cpp" />
+    <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRender.cpp" />
+    <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.cpp" />
     <ClCompile Include="src\GLManager.cpp" />
     <ClCompile Include="src\OsciBuilder.cpp" />
-    <ClCompile Include="src\UserControls.cpp" />
+    <ClCompile Include="src\UserInterfaces\UserControls.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="src\sounID.cu">
+    <CudaCompile Include="src\Examples\ExampleInput.cu">
       <Include Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)common\inc;%(Include)</Include>
       <TargetMachinePlatform Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">64</TargetMachinePlatform>
     </CudaCompile>

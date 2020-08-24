@@ -1,31 +1,31 @@
 #pragma once
 
-#include "headers/ICudaInput.h"
+#include "Headers/ICudaInput.h"
 // #include "IUserControls.h"
 
 
 
 #include "GLManager.h"
 
-#include "ExampleInput.h"
-#include "UserControls.h"
+#include "Examples/ExampleInput.h"
+#include "UserInterfaces/UserControls.h"
 
-class OsciBuilder
+class __declspec(dllexport) OsciBuilder
 {
 public:
 	OsciBuilder() {};
 
 public:
 
-	__declspec(dllexport) void setInputExample();
-	__declspec(dllexport) void setInputSource();
+	void setInputExample();
+	 void setInputSource();
 
-	__declspec(dllexport) void setControlsInbuild();
+	void setControlsInbuild();
 	
-	__declspec(dllexport) void setComputationInbuild();
-	__declspec(dllexport) void setComputation(ICudaInput* computation);
+	void setComputationInbuild();
+	void setComputation(ICudaInput* computation);
 	
-	__declspec(dllexport) void initOsci(int argc, char* argv[]);
+	void initOsci(int argc, char* argv[]);
 
 private:
 	GLManager glManager;

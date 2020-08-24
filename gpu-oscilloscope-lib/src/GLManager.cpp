@@ -1,6 +1,9 @@
 #include "GLManager.h"
-#include "CallbackMapper.h"
-
+#include "UserInterfaces/CallbackMapper.h"
+#include "AdditionalRenderer/CoordinateSystemRenderSettings.h"
+#include "AdditionalRenderer/CoordinateSystemRender.h"
+#include "UserInterfaces/ConsoleView.h"
+#include <thread>
 
 void GLManager::setComputationCore(ICudaInput* cudaInput)
 {
@@ -9,7 +12,7 @@ void GLManager::setComputationCore(ICudaInput* cudaInput)
 
 void GLManager::setControls(IUserControls* controls)
 {
-	this->controls = controls;
+	this->userControls = controls;
 }
 
 void GLManager::initialize(int argc, char* argv[])
@@ -26,14 +29,19 @@ void GLManager::initialize(int argc, char* argv[])
 
 	createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
 
-	while (!glfwWindowShouldClose(window) && controls && cudaInput)
+	consoleView = new ConsoleView(userControls);
+	consoleView->runMultiThread();
+		
+	
+	while (!glfwWindowShouldClose(window) && userControls && cudaInput)
 	{
 		render();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
+	
+	consoleView->stopMultiThread();
 	cleanup(window);
 }
 
@@ -87,8 +95,7 @@ bool GLManager::initGL(int* argc, char** argv)
 	glLoadIdentity();
 
 	// fixme
-	gluPerspective(60.0, static_cast<GLfloat>(windowWidth) / static_cast<GLfloat>(windowHeight), 0.001, 10.0);
-
+	gluPerspective(90.0, static_cast<GLfloat>(windowWidth) / static_cast<GLfloat>(windowHeight), 0.001, 10.0);
 
 	SDK_CHECK_ERROR_GL();
 
@@ -126,21 +133,32 @@ void GLManager::render()
 	// set view matrix
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslated(controls->getTranslationInX(), controls->getTranslationInY(), controls->getTranslationInZ());
-	glRotated(controls->getRotationInX(), 1.0, 0.0, 0.0);
-	glRotated(controls->getRotationInY(), 0.0, 1.0, 0.0);
+	glTranslated(userControls->getTranslationInX(), userControls->getTranslationInY(), userControls->getTranslationInZ());
+	glRotated(userControls->getRotationInX(), 1.0, 0.0, 0.0);
+	glRotated(userControls->getRotationInY(), 0.0, 1.0, 0.0);
 
 	// render from the vbo
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glVertexPointer(4, GL_FLOAT, 0, nullptr);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3f(0.0, 0.0, 1.0);
 	glDrawArrays(GL_POINTS, 0, cudaInput->getCurrentMeshWidth() * cudaInput->getMeshHeight());
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 	windowActiveTime += 0.01f;
 
+	/*
+	 * TODO: Create interfaces e.g. IPlotAddition to manage loading different options during runtime.
+	 */
+	CoordinateSystemRenderSettings renderSettings(window, userControls);
+
+	if(renderSettings.getDrawCoordinateSystem())
+	{
+		CoordinateSystemRender coordinateSystemRender(&renderSettings);
+		coordinateSystemRender.render();
+	}
+	
 	sdkStopTimer(&timer);
 	computeFPS();
 }
@@ -182,7 +200,8 @@ void GLManager::cleanup(GLFWwindow*)
 
 	RemoveCallbackMapping(window);
 
-	delete controls;
+	delete consoleView;
+	delete userControls;
 	delete cudaInput;
 }
 

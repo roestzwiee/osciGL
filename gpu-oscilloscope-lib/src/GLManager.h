@@ -2,10 +2,11 @@
 #ifndef H_GLUTMANAGER
 #define H_GLUTMANAGER
 
-#include "headers/ICudaInput.h"
-#include "headers/IUserControls.h"
+#include "Headers/ICudaInput.h"
+#include "Headers/IUserControls.h"
+#include "UserInterfaces/ConsoleView.h"
 
-constexpr auto REFRESH_DELAY = 10; //ms;
+constexpr auto REFRESH_DELAY = 100; //ms;
 
 class GLManager
 {
@@ -17,13 +18,15 @@ private:
 	/*
 	 * The C++ implementation of User Input Callbacks
 	 */
-	IUserControls* controls;
+	IUserControls* userControls;
 
 	/*
 	 * The C++ implementation for Computation
 	 */
 	ICudaInput* cudaInput;
 
+	ConsoleView* consoleView;
+	
 	/**
 	 * GL Inits
 	 */
@@ -68,7 +71,7 @@ public:
 	 */
 	void initialize(int argc, char* argv[]);
 
-	IUserControls* getControls() { return controls; }
+	IUserControls* getControls() { return userControls; }
 
 private:
 

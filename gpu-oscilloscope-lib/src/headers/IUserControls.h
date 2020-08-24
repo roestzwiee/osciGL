@@ -1,6 +1,7 @@
 #ifndef H_IUserInput
 #define H_IUserInput
 #pragma once
+
 class IUserControls
 {
 public:

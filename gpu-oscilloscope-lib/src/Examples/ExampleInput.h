@@ -1,7 +1,7 @@
 #ifndef H_CUDACOMPUTATION
 #define H_CUDACOMPUTATION
 
-#include "headers/ICudaInput.h"
+#include "../Headers/ICudaInput.h"
 
 extern "C"
 void launch_kernel(float4 * pos, unsigned int mesh_width, unsigned int mesh_height, float time);

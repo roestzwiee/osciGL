@@ -18,22 +18,31 @@
     <ClInclude Include="src\OsciBuilder.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserControls.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="src\headers\IUserControls.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\GLManager.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\CallbackMapper.h">
+    <ClInclude Include="src\Headers\ICudaInput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\headers\ICudaInput.h">
+    <ClInclude Include="src\Headers\IUserControls.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\ExampleInput.h">
+    <ClInclude Include="src\UserInterfaces\UserControls.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterfaces\CallbackMapper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRender.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterfaces\ConsoleView.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Examples\ExampleInput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,17 +50,26 @@
     <ClCompile Include="src\OsciBuilder.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\UserControls.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\GLManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CudaCompile Include="src\sounID.cu" />
+    <ClCompile Include="src\UserInterfaces\UserControls.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRender.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UserInterfaces\ConsoleView.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="src\Examples\ExampleInput.cu" />
   </ItemGroup>
 </Project>
