@@ -1,5 +1,5 @@
 #pragma once
-#include "GLManager.h"
+#include "../GLManager.h"
 #include "CoordinateSystemRenderSettings.h"
 
 class CoordinateSystemRender

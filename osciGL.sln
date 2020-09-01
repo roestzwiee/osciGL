@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "audio-example", "audio-exam
 		{018AD1FD-86A2-49EB-95B2-6AACE5007E46} = {018AD1FD-86A2-49EB-95B2-6AACE5007E46}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gpu-oscilloscope-lib-test", "gpu-oscilloscope-lib-test\gpu-oscilloscope-lib-test.vcxproj", "{1020DF02-C7EB-4BEE-BD1A-966E94E59428}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,16 @@ Global
 		{66FF59A8-F05B-44B2-8396-6D24593F8165}.Release|x64.Build.0 = Release|x64
 		{66FF59A8-F05B-44B2-8396-6D24593F8165}.Release|x86.ActiveCfg = Release|Win32
 		{66FF59A8-F05B-44B2-8396-6D24593F8165}.Release|x86.Build.0 = Release|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Debug|x64.ActiveCfg = Debug|x64
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Debug|x64.Build.0 = Debug|x64
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Debug|x86.ActiveCfg = Debug|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Debug|x86.Build.0 = Debug|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Release|Any CPU.ActiveCfg = Release|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Release|x64.ActiveCfg = Release|x64
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Release|x64.Build.0 = Release|x64
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Release|x86.ActiveCfg = Release|Win32
+		{1020DF02-C7EB-4BEE-BD1A-966E94E59428}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

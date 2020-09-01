@@ -7,9 +7,8 @@
 class CoordinateSystemRenderSettings
 {
 public:
-	CoordinateSystemRenderSettings(GLFWwindow* window, IUserControls* userControls)
+	CoordinateSystemRenderSettings(IUserControls* userControls)
 	{
-		this->window = window;
 		this->userControls = userControls;
 	}
 	
@@ -52,7 +51,6 @@ public:
 private:
 	bool drawCoordinateSystem = true;
 
-	GLFWwindow* window;
 	IUserControls* userControls;
 };
 

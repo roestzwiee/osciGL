@@ -151,7 +151,7 @@ void GLManager::render()
 	/*
 	 * TODO: Create interfaces e.g. IPlotAddition to manage loading different options during runtime.
 	 */
-	CoordinateSystemRenderSettings renderSettings(window, userControls);
+	CoordinateSystemRenderSettings renderSettings(userControls);
 
 	if(renderSettings.getDrawCoordinateSystem())
 	{

@@ -59,3 +59,4 @@
 packages
 *.enc
 *.recipe
+*.CopyComplete
