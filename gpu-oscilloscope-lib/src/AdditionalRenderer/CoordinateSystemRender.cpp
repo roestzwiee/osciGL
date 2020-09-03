@@ -36,10 +36,12 @@ void CoordinateSystemRender::drawGrid() const
 	glEnable(GL_LINE_STIPPLE);
 	glBegin(GL_LINES);
 
-	const double smallestX = settings->getSmallestDisplayedX() - 1.5;
-	const double biggestX = settings->getBiggestDisplayedX() + 1;
-	const double smallestY = settings->getSmallestDisplayedY() - 1.5;
-	const double biggestY = settings->getBiggestDisplayedY() + 1;
+	const FieldOfView fov = settings->getFieldOfView();
+	
+	const double smallestX = fov.minX - 1.5;
+	const double biggestX = fov.maxX + 1;
+	const double smallestY = fov.minY - 1.5;
+	const double biggestY = fov.maxY + 1;
 
 	for (double i = ceil(smallestX); i <= ceil(biggestX); i+= 0.5)
 	{

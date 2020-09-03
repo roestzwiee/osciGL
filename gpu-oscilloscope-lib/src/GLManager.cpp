@@ -130,12 +130,14 @@ void GLManager::render()
 	runComputeInputInternal(&cuda_vbo_resource);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	// set view matrix
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslated(userControls->getTranslationInX(), userControls->getTranslationInY(), userControls->getTranslationInZ());
-	glRotated(userControls->getRotationInX(), 1.0, 0.0, 0.0);
-	glRotated(userControls->getRotationInY(), 0.0, 1.0, 0.0);
+
+	// To get why negating is required, read: https://learnopengl.com/Getting-started/Camera
+	const auto cameraPosition = userControls->getCameraPosition().Negate();
+	glTranslated(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
 	// render from the vbo
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);

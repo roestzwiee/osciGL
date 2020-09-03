@@ -4,6 +4,14 @@
 
 #define M_PI           3.14159265358979323846  /* pi */
 
+struct FieldOfView
+{
+	double maxX;
+	double minX;
+	double maxY;
+	double minY;
+};
+
 class CoordinateSystemRenderSettings
 {
 public:
@@ -28,26 +36,27 @@ public:
 		this->drawCoordinateSystem = drawCoordinateSystem;
 	}
 
-	double getBiggestDisplayedX()
+	FieldOfView getFieldOfView()
 	{
-		return -tan(45 * M_PI / 180) * userControls->getTranslationInZ() - userControls->getTranslationInX();
-	}
+		// TODO: Cache value and debounce calculation for further performance!
 
-	double getSmallestDisplayedX()
-	{
-		return tan(45 * M_PI / 180) * userControls->getTranslationInZ() - userControls->getTranslationInX();
-	}
+		// TODO: use View Angle here!
+		double tanFactor = tan(45 * M_PI / 180);
 
-	double getBiggestDisplayedY()
-	{
-		return -tan(45 * M_PI / 180) * userControls->getTranslationInZ() - userControls->getTranslationInY();
-	}
+		Position cp = userControls->getCameraPosition();
 
-	double getSmallestDisplayedY()
-	{
-		return tan(45 * M_PI / 180) * userControls->getTranslationInZ() - userControls->getTranslationInY();
-	}
+		FieldOfView fieldOfView{
 
+		tanFactor * cp.z + cp.x,
+		-tanFactor * cp.z + cp.x,
+		tanFactor * cp.z + cp.y,
+		-tanFactor * cp.z + cp.y
+
+		};
+
+		return fieldOfView;
+	}
+	
 private:
 	bool drawCoordinateSystem = true;
 

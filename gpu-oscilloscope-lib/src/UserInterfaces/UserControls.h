@@ -15,7 +15,6 @@ private:
 	 */
 	double mouse_old_x = 0, mouse_old_y = 0;
 	int active_mouse_buttons = 0;
-	double rotate_x = 0.0, rotate_y = 0.0;
 	double translate_x = 0.0, translate_y = 0.0, translate_z = -3.0;
 
 public:
@@ -28,30 +27,14 @@ public:
 	void scroll(double xOffset, double yOffset) override;
 	void timerEvent(int value) override;
 
-	double getTranslationInX() override
+	Position getCameraPosition() override
 	{
-		return translate_x;
-	}
-
-	double getTranslationInY() override
-	{
-		return translate_y;
-	}
-
-	double getTranslationInZ() override
-	{
-		return translate_z;
-	}
-
-	double getRotationInX() override
-	{
-		return rotate_x;
-	}
-
-	double getRotationInY() override
-	{
-		return rotate_y;
-	}
+		return Position{
+			translate_x,
+			translate_y,
+			translate_z
+		}.Negate();
+	};
 };
 
 #endif

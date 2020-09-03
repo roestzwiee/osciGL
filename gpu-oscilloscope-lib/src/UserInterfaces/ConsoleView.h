@@ -84,10 +84,10 @@ public:
 	void printCameraPosition() const
 	{
 		// TODO: make this more understandable, e.g. create a camera class
-
+		const auto cameraPosition = userControls->getCameraPosition();
+		
 		char buffer[90];
-		sprintf_s(buffer, "Camera Position: x: %2f, y: %2f, z: %2f", -userControls->getTranslationInX(),
-		          -userControls->getTranslationInY(), -userControls->getTranslationInZ());
+		sprintf_s(buffer, "Camera Position: x: %2f, y: %2f, z: %2f", cameraPosition.x, cameraPosition.y, cameraPosition.z );
 
 		cout << buffer << endl;
 	}

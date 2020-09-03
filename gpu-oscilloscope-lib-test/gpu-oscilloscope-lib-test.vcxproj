@@ -41,6 +41,7 @@
   <ItemGroup>
     <ClCompile Include="RenderSettingsTest.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="UserControlsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\gpu-oscilloscope-lib\gpu-oscilloscope-lib.vcxproj">

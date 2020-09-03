@@ -29,8 +29,7 @@ protected:
 		// Screen Height 2
 
 		
-		EXPECT_CALL(controlsMock, getTranslationInZ()).WillOnce(Return(2.0));
-		EXPECT_CALL(controlsMock, getTranslationInX()).WillOnce(Return(0.0));
+		EXPECT_CALL(controlsMock, getCameraPosition()).WillRepeatedly(Return(Position { 2.0 , 3.0, 0.0 }));
 	}
 
 };
@@ -38,12 +37,9 @@ protected:
 TEST_F(RenderSettingsTest, Simple)
 {
 
-	// EXPECT_CALL(controlsMock, getTranslationInZ()).WillOnce(Return(1.0));
-	// EXPECT_CALL(controlsMock, getTranslationInX()).WillOnce(Return(2.0));
-
 	CoordinateSystemRenderSettings cut(&controlsMock);
 
-	EXPECT_EQ(-3, cut.getBiggestDisplayedX());
+	EXPECT_EQ(-3, cut.getFieldOfView().maxX);
 }
 
 int main(int argc, char** argv) {

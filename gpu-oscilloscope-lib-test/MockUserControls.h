@@ -12,9 +12,6 @@ public:
 	MOCK_METHOD2(scroll, void (double, double));
 	MOCK_METHOD2(motion, void (double, double));
 	MOCK_METHOD1(timerEvent, void (int));
-	MOCK_METHOD0(getTranslationInX, double ());
-	MOCK_METHOD0(getTranslationInY, double ());
-	MOCK_METHOD0(getTranslationInZ, double ());
-	MOCK_METHOD0(getRotationInX, double ());
-	MOCK_METHOD0(getRotationInY, double ());
+	MOCK_METHOD0(getCameraPosition, Position ());
+
 };

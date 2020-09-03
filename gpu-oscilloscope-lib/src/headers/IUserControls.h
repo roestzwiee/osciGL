@@ -2,11 +2,20 @@
 #define H_IUserInput
 #pragma once
 
+struct Position
+{
+	double x, y, z;
+
+	Position Negate () const
+	{
+		return Position{ -x, -y, -z };
+	}
+};
+
 class IUserControls
 {
 public:
-
-	/*
+		/*
 	 * Callback Functions
 	 */
 	virtual void keyboard(int key, int scanCode, int action, int mods) = 0;
@@ -15,13 +24,8 @@ public:
 	virtual void motion(double x, double y) = 0;
 	virtual void timerEvent(int value) = 0;
 
-	virtual double getTranslationInX() = 0;
-	virtual double getTranslationInY() = 0;
-	virtual double getTranslationInZ() = 0;
-
-
-	virtual double getRotationInX() = 0;
-	virtual double getRotationInY() = 0;
+	virtual Position getCameraPosition() = 0;
+	
 };
 
 #endif

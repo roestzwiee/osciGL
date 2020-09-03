@@ -5,6 +5,7 @@
     <ClCompile Include="RenderSettingsTest.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gtest\gtest-all.cc" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\lib\native\src\gmock\gmock-all.cc" />
+    <ClCompile Include="UserControlsTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MockUserControls.h">
