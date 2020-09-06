@@ -1,9 +1,9 @@
 #include "GLManager.h"
 #include "UserInterfaces/CallbackMapper.h"
-#include "AdditionalRenderer/CoordinateSystemRenderSettings.h"
+
 #include "AdditionalRenderer/CoordinateSystemRender.h"
-#include "UserInterfaces/ConsoleView.h"
 #include <thread>
+
 
 void GLManager::setComputationCore(ICudaInput* cudaInput)
 {
@@ -29,9 +29,12 @@ void GLManager::initialize(int argc, char* argv[])
 
 	createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
 
-	consoleView = new ConsoleView(userControls);
+	renderSettings = new CoordinateSystemRenderSettings(userControls); 
+
+	consoleView = new ConsoleView(userControls); // TODO: Burn this constructor
 	consoleView->runMultiThread();
-		
+	consoleView->addInfoOutput(dynamic_cast<IInfoOutput*>(userControls));
+	consoleView->addInfoOutput(renderSettings);
 	
 	while (!glfwWindowShouldClose(window) && userControls && cudaInput)
 	{
@@ -150,14 +153,9 @@ void GLManager::render()
 
 	windowActiveTime += 0.01f;
 
-	/*
-	 * TODO: Create interfaces e.g. IPlotAddition to manage loading different options during runtime.
-	 */
-	CoordinateSystemRenderSettings renderSettings(userControls);
-
-	if(renderSettings.getDrawCoordinateSystem())
+	if(renderSettings->getDrawCoordinateSystem())
 	{
-		CoordinateSystemRender coordinateSystemRender(&renderSettings);
+		CoordinateSystemRender coordinateSystemRender(renderSettings);
 		coordinateSystemRender.render();
 	}
 	
@@ -202,8 +200,10 @@ void GLManager::cleanup(GLFWwindow*)
 
 	RemoveCallbackMapping(window);
 
+	
 	delete consoleView;
 	delete userControls;
+	delete renderSettings;
 	delete cudaInput;
 }
 

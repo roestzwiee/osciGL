@@ -39,7 +39,7 @@ TEST_F(RenderSettingsTest, Simple)
 
 	CoordinateSystemRenderSettings cut(&controlsMock);
 
-	EXPECT_EQ(-3, cut.getFieldOfView().maxX);
+	EXPECT_EQ(2, cut.getFieldOfView().maxX);
 }
 
 int main(int argc, char** argv) {

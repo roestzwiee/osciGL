@@ -1,8 +1,8 @@
 #ifndef H_UserControls
 #define H_UserControls
 
+#include "Output/IInfoOutput.h"
 #include "../Headers/IUserControls.h"
-#include <string>
 
 class UserControls : public IUserControls
 {
@@ -16,6 +16,7 @@ private:
 	double mouse_old_x = 0, mouse_old_y = 0;
 	int active_mouse_buttons = 0;
 	double translate_x = 0.0, translate_y = 0.0, translate_z = -3.0;
+	Position cameraPosition;
 
 public:
 	/*
@@ -29,11 +30,24 @@ public:
 
 	Position getCameraPosition() override
 	{
-		return Position{
+		cameraPosition = Position{
 			translate_x,
 			translate_y,
 			translate_z
 		}.Negate();
+
+		return cameraPosition;
+	}
+
+	list<InfoData> getInfoData() override
+	{
+		auto infoList = list<InfoData>();
+
+		infoList.push_back(InfoData{ "translationX", std::to_string(cameraPosition.x) });
+		infoList.push_back(InfoData{ "translationY", std::to_string(cameraPosition.y) });
+		infoList.push_back(InfoData{ "translationZ", std::to_string(cameraPosition.z) });
+
+		return infoList;
 	};
 };
 

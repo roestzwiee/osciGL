@@ -1,12 +1,13 @@
 ﻿#pragma once
+
 #include <chrono>
 #include <iostream>
 #include <thread>
-
-#include "../Headers/IUserControls.h"
+#include "../../Headers/IUserControls.h"
 #include <windows.h>
 #include <consoleapi.h>
 #include <winbase.h>
+#include "IInfoOutput.h"
 
 using namespace std;
 
@@ -20,14 +21,13 @@ public:
 	{
 		this->userControls = userControls;
 		lastUpdated = Time::now();
-
-
+		
 		HANDLE hInput = CreateFileW(L"CONIN$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, nullptr);
 
 		DWORD prev_mode;
 		GetConsoleMode(hInput, &prev_mode);
 		SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS );
-		
+
 	}
 
 	void runMultiThread()
@@ -47,18 +47,24 @@ public:
 
 	void view()
 	{
+		cls();
 		do
 		{
 			do
 			{
-				this_thread::sleep_for(chrono::milliseconds(50));
+				this_thread::sleep_for(chrono::milliseconds(100));
 			}
 			while (isDeBounceRequired());
 
-			cls();
 
+			setCursorPosition(0, 0);
 			printBanner();
+
+			setCursorPosition(0, 7);
 			printCameraPosition();
+
+			currentCursorLine = 8;
+			printInfoOutputs();
 		}
 		while (stayActive);
 	}
@@ -92,12 +98,38 @@ public:
 		cout << buffer << endl;
 	}
 
+	void printInfoOutputs()
+	{
+		for (IInfoOutput* infoOutput: infoOutputs)
+		{
+			++currentCursorLine;
+			printInfoDataList(infoOutput->getInfoData());
+		}
+	}
+
+	void printInfoDataList(list<InfoData> list)
+	{
+		for(InfoData infoData  : list)
+		{
+			setCursorPosition(0, ++currentCursorLine);
+			cout << infoData.label << ": " << infoData.value;
+		}
+	}
+	
+	void addInfoOutput(IInfoOutput* infoOutput)
+	{
+		infoOutputs.push_back(infoOutput);
+	}
+
 private:
 	IUserControls* userControls;
 	std::chrono::high_resolution_clock::time_point lastUpdated;
 	std::thread consoleViewThread;
-
+	std::list<IInfoOutput*> infoOutputs;
+	
 	bool stayActive = false;
+
+	int currentCursorLine;
 
 	const string BANNER =
 		"       ____                    _    ______    __     \r\n"
@@ -139,6 +171,12 @@ private:
 
 		// Move the cursor back to the top left for the next sequence of writes
 		SetConsoleCursorPosition(hOut, topLeft);
+
+
+		CONSOLE_CURSOR_INFO     cursorInfo;
+		GetConsoleCursorInfo(hOut, &cursorInfo);
+		cursorInfo.bVisible = false; // set the cursor visibility
+		SetConsoleCursorInfo(hOut, &cursorInfo);
 	}
 
 

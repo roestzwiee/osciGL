@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\UserInterfaces\ConsoleView.h" />
+    <ClInclude Include="src\UserInterfaces\Output\ConsoleView.h" />
     <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRender.h" />
     <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.h" />
     <ClInclude Include="src\UserInterfaces\CallbackMapper.h" />
@@ -180,10 +180,11 @@
     <ClInclude Include="src\Headers\ICudaInput.h" />
     <ClInclude Include="src\Headers\IUserControls.h" />
     <ClInclude Include="src\OsciBuilder.h" />
+    <ClInclude Include="src\UserInterfaces\Output\IInfoOutput.h" />
     <ClInclude Include="src\UserInterfaces\UserControls.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\UserInterfaces\ConsoleView.cpp" />
+    <ClCompile Include="src\UserInterfaces\Output\ConsoleView.cpp" />
     <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRender.cpp" />
     <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.cpp" />
     <ClCompile Include="src\GLManager.cpp" />

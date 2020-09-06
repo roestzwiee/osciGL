@@ -1,6 +1,7 @@
 #ifndef H_IUserInput
 #define H_IUserInput
 #pragma once
+#include "../UserInterfaces/Output/IInfoOutput.h"
 
 struct Position
 {
@@ -12,7 +13,7 @@ struct Position
 	}
 };
 
-class IUserControls
+class IUserControls : public IInfoOutput
 {
 public:
 		/*

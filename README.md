@@ -4,7 +4,7 @@ osciGL is a small wrapper utility that shall help visualizing and analyzing samp
 ## Vision and Idea
 Imagine you get a new device that just tells you raw data. With normal circumstances you'd first just catch a sample of the data, and write a small Matlab or Python script to get known to formats, required transformations or further different imaging alorithms. Now imagine you'd have a realitime environment for getting known to unknown data. You open your IDE, tell some class your first idea of how your input looks alike and your machine just starts drawing. 
 
-With osciGL this problem shall become simple and convenient to solve. osciGL makes direct use of the GPU to analyze any available input stream in reliant and performant prototypic applications.
+With osciGL this problem shall become simple and convenient to solve. osciGL makes direct use of the GPU to analyze input streams reliant and performant. 
 
 Nowadays this means that increddible amounts of samples can be added, moved, transformed, etc. within the split of a second. You don't even need the newest GPUs for it. Even if you want to deal with either big amounts of data or high resolution data.
 
@@ -19,11 +19,21 @@ osciGL is still in its most early development stages.
 
 To be able to reach a wide amount of users osciGL is tried to be implemented as optional and modular as possible. A simple API together with small cut interfaces and highly extendible abstract classes shall provide an readable and conclusive environment for digital data processing. 
 
+Currently the most techtonic action in osciGL is inside its architecture. Interfaces are added and changed up and down. While writing the first unit tests with googletest, more and more possibilities for modualrization is found. 
+
 ## Currently in Work
+
+Unfortunately before further development of new features, a proper output interface and some unit tests have to be implemented. 
+
+![osciGL in current stage](docs/StillEarly.png)
+
+
 
 ### Improved Zooming & Scales and Metrics
 - get familiar with the non existing camera concept
 see: https://learnopengl.com/Getting-started/Camera
+
+o We can create a functionality that provides the perfect camera base by calculating the Orthonormal Basis for some vectors.
 
 ### Evaluate Window Toolkits
 - done! GLFW it is!

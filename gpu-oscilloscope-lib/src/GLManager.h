@@ -4,7 +4,8 @@
 
 #include "Headers/ICudaInput.h"
 #include "Headers/IUserControls.h"
-#include "UserInterfaces/ConsoleView.h"
+#include "AdditionalRenderer/CoordinateSystemRenderSettings.h"
+#include "UserInterfaces/Output/ConsoleView.h"
 
 constexpr auto REFRESH_DELAY = 100; //ms;
 
@@ -19,13 +20,17 @@ private:
 	 * The C++ implementation of User Input Callbacks
 	 */
 	IUserControls* userControls;
+	
 
+	
 	/*
 	 * The C++ implementation for Computation
 	 */
 	ICudaInput* cudaInput;
 
 	ConsoleView* consoleView;
+	CoordinateSystemRenderSettings* renderSettings;
+
 	
 	/**
 	 * GL Inits

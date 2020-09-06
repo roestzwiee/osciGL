@@ -39,10 +39,13 @@
     <ClInclude Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserInterfaces\ConsoleView.h">
+    <ClInclude Include="src\Examples\ExampleInput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="src\Examples\ExampleInput.h">
+    <ClInclude Include="src\UserInterfaces\Output\ConsoleView.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterfaces\Output\IInfoOutput.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +65,7 @@
     <ClCompile Include="src\AdditionalRenderer\CoordinateSystemRenderSettings.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="src\UserInterfaces\ConsoleView.cpp">
+    <ClCompile Include="src\UserInterfaces\Output\ConsoleView.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
